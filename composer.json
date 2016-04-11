@@ -1,0 +1,21 @@
+{
+    "name": "gallna/swagger-jane",
+    "require": {
+        "jane/open-api": "^1.2",
+        "guzzlehttp/psr7": "^1.2",
+        "php-http/message": "^1.2",
+        "php-http/guzzle6-adapter": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Tomasz Jonik",
+            "email": "tom.jonik@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "app",
+            "Kemer\\Swagger\\Jane\\": "src/Kemer/Swagger/Jane"
+        }
+    }
+}

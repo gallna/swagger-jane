@@ -36,9 +36,15 @@ class MessageFactory implements MessageFactoryInterface
         $body = null,
         $protocolVersion = '1.1'
     ) {
+        $host = $this->host;
+        if (isset($headers["Host"])) {
+            $host = $host ?: $headers["Host"];
+            unset($headers["Host"]);
+        }
+
         return new Request(
             $method,
-            sprintf("%s://%s/%s", $this->scheme, $this->host ?: $headers["Host"], $uri),
+            sprintf("%s://%s%s", $this->scheme, $host, $uri),
             $headers,
             $body,
             $protocolVersion

@@ -29,9 +29,9 @@ use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
  */
 abstract class AbstractFactory
 {
-    private $scheme;
+    protected $scheme;
 
-    private $host;
+    protected $host;
 
     /**
      * {@inheritdoc}

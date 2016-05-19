@@ -9,6 +9,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
+use GuzzleHttp\Client as GuzzleClient;
 
 trait FactoryTrait
 {
@@ -20,11 +21,20 @@ trait FactoryTrait
     /**
      * {@inheritdoc}
      */
-    public function factory($class, $host = null)
+    public function fromUri($class, $baseUri)
+    {
+        $client = new GuzzleClient(['base_uri' => $baseUri]);
+        return $this->factory($class, $client);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function factory($class, GuzzleClient $client)
     {
         return new $class(
-            $this->getHttpClient(),
-            $this->getMessageFactory($host),
+            $this->getHttpClient($client),
+            $this->getMessageFactory(),
             $this->getSerializer()
         );
     }
@@ -32,9 +42,9 @@ trait FactoryTrait
     /**
      * {@inheritdoc}
      */
-    public function getHttpClient()
+    public function getHttpClient(GuzzleClient $client)
     {
-        return new GuzzleAdapter();
+        return new GuzzleAdapter($client);
     }
 
     /**

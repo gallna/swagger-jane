@@ -41,7 +41,7 @@ class MessageFactory implements MessageFactoryInterface
             $host = $host ?: $headers["Host"];
             unset($headers["Host"]);
         }
-
+        $headers["Content-Type"] = "application/json";
         return new Request(
             $method,
             sprintf("%s://%s%s", $this->scheme, $host, $uri),

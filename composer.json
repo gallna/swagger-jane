@@ -1,6 +1,8 @@
 {
     "name": "gallna/swagger-jane",
+    "description": "Jane static factory implementation",
     "require": {
+        "php": ">=5.4.0",
         "jane/open-api": "^1.2",
         "guzzlehttp/psr7": "^1.2",
         "php-http/message": "^1.2",
